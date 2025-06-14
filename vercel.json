@@ -6,7 +6,7 @@
       "use": "@vercel/node",
       "config": {
         "installCommand": "npm install",
-        "buildCommand": "npm run build" // Atau perintah build Anda
+        "buildCommand": "npm run build"
       }
     }
   ],
