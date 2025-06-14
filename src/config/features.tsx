@@ -17,7 +17,7 @@ const { T } = createI18n(provider, {
     music: 'Music Player',
     'music description': 'Play music in Your Discord Server',
     bagus: 'Music Playtime',
-    'Bagus description': 'Play music in Your Discord Server',
+    'bagus description': 'Play music in Your Discord Server',
     gaming: 'Gaming',
     'gaming description': 'Enjoy playing games with your friends',
     'reaction role': 'Reaction Role',
@@ -28,6 +28,8 @@ const { T } = createI18n(provider, {
   cn: {
     music: '音樂播放器',
     'music description': '在您的 Discord 服務器中播放音樂',
+    bagus: 'Music Playtime End',
+    'bagus description': 'Play End music in Your Discord Server',
     gaming: '遊戲',
     'gaming description': 'Enjoy playing games with your friends',
     'reaction role': '反應角色',
