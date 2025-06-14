@@ -57,17 +57,7 @@ export const features: FeaturesConfig = {
       };
     },
   },
-  bagus: {
-     name: <T text="bagus" />,
-    description: <T text="music description" />,
-     icon: <Icon as={BsMusicNoteBeamed} />,
-    useRender() {
-      return {
-        component: <></>,
-        onSubmit: () => {},
-      };
-    },
-  },
+  
   'welcome-message': {
     name: 'Welcome Message',
     description: 'Send message when user joined the server',
