@@ -41,6 +41,14 @@ const { T } = createI18n(provider, {
  * There is an example:
  */
 export const features: FeaturesConfig = {
+  'feature-id': {
+     name: 'Feature name',
+     description: 'Description about this feature',
+     icon: <Icon as={BsMusicNoteBeamed} />, //give it a cool icon
+     useRender: (data) => {
+         //render the form
+     },
+  },
   music: {
     name: <T text="music" />,
     description: <T text="music description" />,
