@@ -53,6 +53,7 @@ function verifySignature(body: string, signature: string, timestamp: string, tok
 
 function handleMessageCreate(data: any) {
   console.log('Pesan baru:', data.d.content);
+  console.log('Bagus Tezt');
   // ... logika untuk memproses pesan baru ...
 }
 
