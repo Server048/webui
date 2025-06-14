@@ -16,6 +16,8 @@ const { T } = createI18n(provider, {
   en: {
     music: 'Music Player',
     'music description': 'Play music in Your Discord Server',
+    bagus: 'Music Playtime',
+    'Bagus description': 'Play music in Your Discord Server',
     gaming: 'Gaming',
     'gaming description': 'Enjoy playing games with your friends',
     'reaction role': 'Reaction Role',
@@ -41,9 +43,9 @@ const { T } = createI18n(provider, {
  * There is an example:
  */
 export const features: FeaturesConfig = {
-  'feature-id': {
-     name: 'Feature name',
-     description: 'Description about this feature',
+  bagus: {
+     name: <T text="bagus" />,
+    description: <T text="music description" />,
      icon: <Icon as={BsMusicNoteBeamed} />, //give it a cool icon
      useRender: (data) => {
          //render the form
