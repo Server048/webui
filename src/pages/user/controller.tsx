@@ -1,10 +1,10 @@
 import { useSession } from '@/utils/auth/hooks';
-import { ProfilePage } from './ProfilePage';
+import { ProfilePage } from './ProfilePage'; // Pastikan path ini benar
 import { Box, Spinner } from '@chakra-ui/react';
-import { useSettingsStore } from '@/stores/pageStore'; // Path import yang diperbaiki
+import { useSettingsStore } from '@/stores/pageStore';
+import { Redirect } from 'next/navigation';
 
-
-const Controller: NextPageWithLayout = () => {
+const Controller: React.FC = () => {
   const { status, session } = useSession();
   const devMode = useSettingsStore((state) => state.devMode);
 
@@ -17,8 +17,7 @@ const Controller: NextPageWithLayout = () => {
   }
 
   if (status === 'unauthenticated') {
-    // Redirect ke halaman login jika belum login.  Sesuaikan dengan routing Anda.
-    return <Redirect to="/auth/signin" />; 
+    return <Redirect href="/auth/signin" />;
   }
 
   // Pastikan session memiliki data yang dibutuhkan sebelum merender ProfilePage
@@ -26,14 +25,7 @@ const Controller: NextPageWithLayout = () => {
     return <Box>Terjadi kesalahan saat mengambil data pengguna.</Box>;
   }
 
-  return (
-    <ProfilePage
-      session={session}
-      devMode={devMode}
-    />
-  );
+  return <ProfilePage session={session} devMode={devMode} />;
 };
-
-Controller.getLayout = (page) => <AppLayout>{page}</AppLayout>;
 
 export default Controller;
