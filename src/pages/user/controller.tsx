@@ -1,31 +1,17 @@
-import { useSession } from '@/utils/auth/hooks';
-import { ProfilePage } from './ProfilePage'; // Pastikan path ini benar
-import { Box, Spinner } from '@chakra-ui/react';
-import { useSettingsStore } from '@/stores/pageStore';
-import { Redirect } from 'next/navigation';
+import { Box, Text, Card, CardBody } from '@chakra-ui/react';
 
-const Controller: React.FC = () => {
-  const { status, session } = useSession();
-  const devMode = useSettingsStore((state) => state.devMode);
-
-  if (status === 'loading') {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-        <Spinner size="xl" />
-      </Box>
-    );
-  }
-
-  if (status === 'unauthenticated') {
-    return <Redirect href="/auth/signin" />;
-  }
-
-  // Pastikan session memiliki data yang dibutuhkan sebelum merender ProfilePage
-  if (!session || !session.user || !session.user.username) {
-    return <Box>Terjadi kesalahan saat mengambil data pengguna.</Box>;
-  }
-
-  return <ProfilePage session={session} devMode={devMode} />;
+const ProfilePage = () => {
+  return (
+    <Box> {/* Menggunakan Box sebagai kontainer utama */}
+      <Card>
+        <CardBody>
+          <Text fontSize="xl" fontWeight="bold">
+            Ini Adalah Kode Test dari Server
+          </Text>
+        </CardBody>
+      </Card>
+    </Box>
+  );
 };
 
-export default Controller;
+export default controller;
