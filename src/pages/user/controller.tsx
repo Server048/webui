@@ -3,12 +3,19 @@ import {
   Button,
   Flex,
   IconButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
   Stack,
   Text,
   useColorModeValue,
+  Card,
+  CardBody,
 } from '@chakra-ui/react';
 import {
   HomeIcon,
+  ChevronDownIcon,
   ChevronRightIcon,
   DocumentIcon,
   RepeatIcon,
@@ -17,7 +24,6 @@ import {
   SettingsIcon,
   ArrowRightIcon,
 } from '@chakra-ui/icons';
-
 
 const Sidebar = () => {
   const bg = useColorModeValue('gray.100', 'gray.700');
@@ -30,10 +36,9 @@ const Sidebar = () => {
       boxShadow="md"
       rounded="md"
       p={4}
-      display={{ base: 'none', md: 'block' }} // Hanya tampilkan di layar medium ke atas
+      display={{ base: 'none', md: 'block' }}
     >
       <Flex mb={4} align="center">
-        {/* Ganti dengan avatar dan nama pengguna Anda */}
         <Box mr={2} w="40px" h="40px" rounded="full" bg="gray.300" />
         <Text fontWeight="bold" fontSize="lg">GrowTree - PS</Text>
       </Flex>
@@ -55,4 +60,22 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+const Controller = () => {
+  return (
+    <Flex>
+      <Sidebar />
+      <Box ml={4} p={4}> {/* Added margin-left and padding */}
+        <Card>
+          <CardBody>
+            <Text fontSize="xl" fontWeight="bold">
+              Ini Adalah Kode Test dari Server
+            </Text>
+          </CardBody>
+        </Card>
+      </Box>
+    </Flex>
+  );
+};
+
+export default Controller;
+
