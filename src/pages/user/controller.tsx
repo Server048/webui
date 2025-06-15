@@ -1,6 +1,6 @@
 import { Box, Text, Card, CardBody } from '@chakra-ui/react';
 
-const ProfilePage = () => {
+const controller = () => {
   return (
     <Box> {/* Menggunakan Box sebagai kontainer utama */}
       <Card>
