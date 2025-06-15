@@ -1,28 +1,58 @@
-import { Box, Text, Card, CardBody, Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
-import { ChevronDownIcon } from '@chakra-ui/icons'; // Import ikon untuk menu
+import {
+  Box,
+  Button,
+  Flex,
+  IconButton,
+  Stack,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react';
+import {
+  HomeIcon,
+  ChevronRightIcon,
+  DocumentIcon,
+  RepeatIcon,
+  RocketIcon,
+  DownloadIcon,
+  SettingsIcon,
+  ArrowRightIcon,
+} from '@chakra-ui/icons';
 
-const Controller = () => {
+
+const Sidebar = () => {
+  const bg = useColorModeValue('gray.100', 'gray.700');
+  const color = useColorModeValue('gray.700', 'gray.200');
+
   return (
-    <Box>
-      <Menu>
-        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-          Pilih Menu
-        </MenuButton>
-        <MenuList>
-          <MenuItem>Profile</MenuItem>
-          <MenuItem>Connect</MenuItem>
-          <MenuItem>Controller</MenuItem>
-        </MenuList>
-      </Menu>
-      <Card mt={4}> {/* Menambahkan margin atas */}
-        <CardBody>
-          <Text fontSize="xl" fontWeight="bold">
-            Ini Adalah Kode Test dari Server
-          </Text>
-        </CardBody>
-      </Card>
+    <Box
+      w="200px"
+      bg={bg}
+      boxShadow="md"
+      rounded="md"
+      p={4}
+      display={{ base: 'none', md: 'block' }} // Hanya tampilkan di layar medium ke atas
+    >
+      <Flex mb={4} align="center">
+        {/* Ganti dengan avatar dan nama pengguna Anda */}
+        <Box mr={2} w="40px" h="40px" rounded="full" bg="gray.300" />
+        <Text fontWeight="bold" fontSize="lg">GrowTree - PS</Text>
+      </Flex>
+      <Stack spacing={4}>
+        <Button variant="solid" colorScheme="purple" leftIcon={<HomeIcon />}>
+          Dashboard
+        </Button>
+        <Button leftIcon={<ChevronRightIcon />}>Perintah Bot</Button>
+        <Button leftIcon={<DocumentIcon />}>Log Bot</Button>
+        <Button leftIcon={<RepeatIcon />}>Log Pengguna</Button>
+        <Button leftIcon={<RocketIcon />}>Uji Bot</Button>
+        <Button leftIcon={<DownloadIcon />}>Ekspor Bot</Button>
+        <Button leftIcon={<SettingsIcon />}>Pengaturan</Button>
+        <Button variant="outline" colorScheme="red" rightIcon={<ArrowRightIcon />}>
+          Keluar
+        </Button>
+      </Stack>
     </Box>
   );
 };
 
-export default Controller;
+export default Sidebar;
