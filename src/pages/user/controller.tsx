@@ -64,7 +64,7 @@ const Controller = () => {
   return (
     <Flex>
       <Sidebar />
-      <Box ml={4} p={4}> {/* Added margin-left and padding */}
+      <Box ml={4} p={4}>
         <Card>
           <CardBody>
             <Text fontSize="xl" fontWeight="bold">
@@ -76,6 +76,5 @@ const Controller = () => {
     </Flex>
   );
 };
-
 export default Controller;
 
