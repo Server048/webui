@@ -1,65 +1,62 @@
+import { Box, Button, Flex, Stack, Text, useColorModeValue } from '@chakra-ui/react';
 import {
-  Box,
-  Button,
-  ChakraProvider,
-  extendTheme,
-  Text,
-  useColorMode,
-  useColorModeValue,
-} from '@chakra-ui/react';
-import React, { useState } from 'react';
+  HomeIcon,
+  ChevronRightIcon,
+  DocumentIcon,
+  RepeatIcon,
+  RocketIcon,
+  DownloadIcon,
+  SettingsIcon,
+  ArrowRightIcon,
+} from '@chakra-ui/icons';
 
-// Definisi tema dengan warna Brand
-const theme = extendTheme({
-  colors: {
-    Brand: {
-      50: '#f0f0f0',
-      100: '#d0d0d0',
-      200: '#b0b0b0',
-      300: '#909090',
-      400: '#707070',
-      500: '#505050',
-      600: '#303030',
-      700: '#101010',
-      800: '#000000',
-      900: '#000000',
-    },
-  },
-});
+interface SidebarProps {}
 
-
-const MyComponent = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
-  const bgColor = useColorModeValue('Brand.50', 'Brand.700'); // Warna latar belakang bergantung pada mode
+const Sidebar: React.FC<SidebarProps> = () => {
+  const bg = useColorModeValue('gray.800', 'gray.700');
+  const color = useColorModeValue('white', 'gray.200');
 
   return (
-    <Box p={4}>
-      <Button onClick={toggleColorMode}>
-        Toggle {colorMode === 'light' ? 'Dark' : 'Light'} Mode
-      </Button>
-      <Box
-        mt={4}
-        bg={bgColor}
-        rounded="2xl"
-        sx={{ aspectRatio: '1100/440' }}
-        boxShadow="md" // Tambahkan bayangan untuk visual yang lebih baik.
-        p={6} // Tambahkan padding agar konten tidak terlalu menempel ke tepi.
-      >
-        <Text fontSize="xl" fontWeight="bold">
-          Ini adalah contoh kotak dengan latar belakang warna Brand.
+    <Box
+      w="200px"
+      bg={bg}
+      boxShadow="md"
+      rounded="md"
+      p={4}
+      display={{ base: 'none', md: 'block' }}
+    >
+      <Flex mb={4} align="center">
+        <Box mr={2} w="40px" h="40px" rounded="full" bg="gray.300" />
+        <Text fontWeight="bold" fontSize="lg" color={color}>
+          GrowTree - PS
         </Text>
-      </Box>
+        <Text fontSize="sm" color={color}>Kelola bot Discord Anda</Text>
+      </Flex>
+      <Stack spacing={4}>
+        <Button variant="solid" colorScheme="purple" leftIcon={<HomeIcon />} color={color}>
+          Dashboard
+        </Button>
+        <Button leftIcon={<ChevronRightIcon />} color={color}>Perintah Bot</Button>
+        <Button leftIcon={<DocumentIcon />} color={color}>Log Bot</Button>
+        <Button leftIcon={<RepeatIcon />} color={color}>Log Pengguna</Button>
+        <Button leftIcon={<RocketIcon />} color={color}>Uji Bot</Button>
+        <Button leftIcon={<DownloadIcon />} color={color}>Ekspor Bot</Button>
+        <Button leftIcon={<SettingsIcon />} color={color}>Pengaturan</Button>
+        <Button variant="outline" colorScheme="red" rightIcon={<ArrowRightIcon />} color={color}>
+          Keluar
+        </Button>
+      </Stack>
     </Box>
   );
 };
 
-const App = () => {
+const Controller: React.FC = () => {
   return (
-    <ChakraProvider theme={theme}>
-      <MyComponent />
-    </ChakraProvider>
+    <Flex>
+      <Sidebar />
+      <Box ml={4} p={4} /> {/* Ruang kosong untuk konten utama */}
+    </Flex>
   );
 };
 
-export default App;
-
+export default Controller;
