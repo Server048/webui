@@ -64,7 +64,7 @@ const Controller = () => {
   return (
     <Flex>
       <Sidebar />
-      <Box ml={4} p={4}>
+      <Box ml={4} p={4}> {/* Hanya satu Box */}
         <Card>
           <CardBody>
             <Text fontSize="xl" fontWeight="bold">
@@ -76,5 +76,5 @@ const Controller = () => {
     </Flex>
   );
 };
-export default Controller;
 
+export default Controller;
