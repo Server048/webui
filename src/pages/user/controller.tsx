@@ -1,12 +1,12 @@
 import { useSession } from '@/utils/auth/hooks';
 import { ProfilePage } from './ProfilePage';
 import { Box, Spinner } from '@chakra-ui/react';
-import { useSettingsStore } from '@/stores';
+import { useSettingsStore } from '@/stores/pageStore'; // Path import yang diperbaiki
 
 
 const Controller: NextPageWithLayout = () => {
   const { status, session } = useSession();
-  const devMode = useSettingsStore((state) => state.devMode); // Ambil devMode dari store
+  const devMode = useSettingsStore((state) => state.devMode);
 
   if (status === 'loading') {
     return (
@@ -26,7 +26,6 @@ const Controller: NextPageWithLayout = () => {
     return <Box>Terjadi kesalahan saat mengambil data pengguna.</Box>;
   }
 
-
   return (
     <ProfilePage
       session={session}
@@ -38,4 +37,3 @@ const Controller: NextPageWithLayout = () => {
 Controller.getLayout = (page) => <AppLayout>{page}</AppLayout>;
 
 export default Controller;
-
