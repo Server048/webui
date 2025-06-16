@@ -71,8 +71,8 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, href: '/' }, // href untuk Home
-  { name: 'Profile', icon: FiTrendingUp, href: '/profile' }, // href untuk Profile
+  { name: 'Home', icon: FiHome, href: '#' }, // href untuk Home
+  { name: 'Profile', icon: FiTrendingUp, href: '#' }, // href untuk Profile
   { name: 'Connect', icon: FiCompass, href: '#' },
   { name: 'Controller', icon: FiSettings, href: '#' },
   { name: 'Settings', icon: FiSettings, href: '#' },
@@ -102,34 +102,34 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   );
 };
 
-const NavItem = ({ icon, children, href, ...rest }: NavItemProps & { href: string }) => { // Memperbaiki type
+const NavItem = ({ icon, children, href, ...rest }: NavItemProps & { href: string }) => {
   const router = useRouter();
   return (
-    <div onClick={(e) => { //Menggunakan div bukan Link dari next/link
+    <div onClick={(e) => {
       e.preventDefault();
       router.push(href);
-    }}> {/* Menggunakan div untuk menghindari konflik dengan next/link */}
-      <Box as="a" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}> {/* Box dibuka di sini */}
-      <Flex
-        align="center"
-        p="4"
-        mx="4"
-        borderRadius="lg"
-        role="group"
-        cursor="pointer"
-        _hover={{ bg: 'cyan.400', color: 'white' }}
-        {...rest}
-      >
-        {icon && (
-          <Icon mr="4" fontSize="16" _groupHover={{ color: 'white' }} as={icon} />
-        )}
-        {children}
-      </Flex>
-        </Box>
-      </div>
-    
+    }}>
+      <Box as="a" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+        <Flex
+          align="center"
+          p="4"
+          mx="4"
+          borderRadius="lg"
+          role="group"
+          cursor="pointer"
+          _hover={{ bg: 'cyan.400', color: 'white' }}
+          {...rest}
+        >
+          {icon && (
+            <Icon mr="4" fontSize="16" _groupHover={{ color: 'white' }} as={icon} />
+          )}
+          {children}
+        </Flex>
+      </Box> {/* Box ditutup DI SINI */}
+    </div>
   );
 };
+
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const user = useSelfUser();
