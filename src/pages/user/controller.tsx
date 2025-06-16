@@ -18,8 +18,7 @@ import { iconUrl } from '@/api/discord';
 import Link from 'next/link';
 
 const HomePage: NextPageWithLayout = () => {
-  //used for example only, you should remove it
-  return <HomeView />;
+  
 
   return <GuildSelect />;
 };
