@@ -50,19 +50,18 @@ import { NextPageWithLayout } from '@/pages/_app';
 import AppLayout from '@/components/layout/app';
 import { iconUrl } from '@/api/discord';
 import Link from 'next/link';
-import { useRef, useState } from 'react'; // Tambahkan useRef dan useState
+
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
-  href: string;
+  href?: string; // Menambahkan properti href
 }
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: React.ReactNode;
-  href: string;
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  href?: string; // Menambahkan properti href
 }
 
 interface MobileProps extends FlexProps {
@@ -73,10 +72,9 @@ interface SidebarProps extends BoxProps {
   onClose: () => void;
 }
 
-
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, href: '#' }, // href untuk Home
-  { name: 'Profile', icon: FiTrendingUp, href: '#' }, // href untuk Profile
+  { name: 'Home', icon: FiHome, href: '/' }, // Menambahkan href
+  { name: 'Profile', icon: FiTrendingUp, href: '/profile' }, // Menambahkan href
   { name: 'Connect', icon: FiCompass, href: '#' },
   { name: 'Controller', icon: FiSettings, href: '#' },
   { name: 'Settings', icon: FiSettings, href: '#' },
@@ -101,27 +99,17 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} href={link.href} />
+        <NavItem key={link.name} icon={link.icon} href={link.href}> {/* Meneruskan href ke NavItem */}
+          {link.name}
+        </NavItem>
       ))}
     </Box>
   );
 };
 
-const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => {
-  const [isActive, setIsActive] = useState(false); // State untuk menandai item aktif
-  const ref = useRef<HTMLDivElement>(null); // Ref untuk elemen NavItem
-
+const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => { // Menambahkan href
   return (
-    <div
-      ref={ref}
-      onClick={(e) => {
-        setIsActive(true); // Set state menjadi true saat diklik
-        setTimeout(() => setIsActive(false), 100); // Set state menjadi false setelah 100ms (untuk menghindari highlight yang terlalu lama)
-        // ... navigasi ...
-      }}
-      className={isActive ? "active" : ""} // Tambahkan class active untuk styling
-      style={{textDecoration: 'none'}}
-    >
+    <Link href={href || '#'}> {/* Menggunakan href untuk Link, default ke '#' jika tidak didefinisikan */}
       <Box as="a" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
         <Flex
           align="center"
@@ -138,11 +126,10 @@ const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => {
           )}
           {children}
         </Flex>
-      </Box> {/* Box ditutup DI SINI */}
-    </div>
+      </Box>
+    </Link>
   );
 };
-
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const user = useSelfUser();
@@ -165,6 +152,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         aria-label="open menu"
         icon={<FiMenu />}
       />
+
       <Text display={{ base: 'flex', md: 'none' }} fontSize="2xl" fontFamily="monospace" fontWeight="bold">
         BOT CONTROLLER CPS
       </Text>
@@ -177,15 +165,14 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 <Avatar
                   size={'sm'}
                   src={avatarUrl(user)}
-                /> {/* GANTI DENGAN URL GAMBAR YANG VALID */}
+                />
                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
                   <Text fontSize="sm">
                     {user.username}
-                    </Text>
+                  </Text>
                   <Text fontSize="xs" color="gray.600">
-  {user.username === "thedeviltime" ? "Admin" : "Free"}
-</Text>
-
+                    {user.username === "thedeviltime" ? "Admin" : "Free"}
+                  </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
                   <FiChevronDown />
@@ -223,23 +210,18 @@ const SidebarWithHeader = () => {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        {/* Content */}
+        {/* Konten */}
+        <Text>Bekerja Sekarang</Text> {/* Ditambahkan untuk debugging */}
       </Box>
     </Box>
   );
 };
 
 const HomePage: NextPageWithLayout = () => {
-  
-
   return <SidebarWithHeader />;
 };
-
-  
-
 
 HomePage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
 export default HomePage;
