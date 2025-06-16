@@ -3,11 +3,25 @@ import {
   Box,
   Button,
   IconButton,
+  CloseButton,
   Image,
   Card,
   useDisclosure,
   useBreakpointValue,
   List,
+  HStack,
+  Drawer,
+  FlexProps,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+  DrawerContent,
+  useDisclosure,
+  BoxProps,
+  useColorModeValue,
+  VStack,
   ListItem,
   ListIcon,
   CardHeader,
@@ -18,8 +32,16 @@ import {
   Text,
 } from '@chakra-ui/react';
 import {
-  HamburgerIcon,
-} from '@chakra-ui/icons';
+  FiHome,
+  FiTrendingUp,
+  FiCompass,
+  FiStar,
+  FiSettings,
+  FiMenu,
+  FiBell,
+  FiChevronDown,
+} from 'react-icons/fi';
+import { IconType } from 'react-icons';
 import { config } from '@/config/common';
 import { useGuilds } from '@/api/hooks';
 
