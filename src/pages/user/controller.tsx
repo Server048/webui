@@ -127,7 +127,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
-  const user = useSelfUser();
+  const { data: user, isLoading, error } = useSelfUser();
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -161,12 +161,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   src={'https://bit.ly/sage-adebayo'}
                 /> {/* GANTI DENGAN URL GAMBAR YANG VALID */}
                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
-                  <Text fontSize="sm">
-            {user.username}
-          </Text>
                   <Text fontSize="sm" color="gray.600">
-                    Admin
-                  </Text>
+        {user?.username === "thedeviltime" ? 'Admin' : 'Pengguna'}
+      </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
                   <FiChevronDown />
