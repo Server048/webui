@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { ChakraProvider } from '@chakra-ui/react';
 import {
   Box,
   Button,
@@ -23,13 +26,14 @@ import {
   ArrowRightIcon,
 } from '@chakra-ui/icons';
 
+
 const Sidebar = () => {
   const bg = useColorModeValue('gray.100', 'gray.700');
   const color = useColorModeValue('gray.700', 'gray.200');
 
   return (
     <Box
-      w= { "200px" }
+      w="200px"
       bg={bg}
       boxShadow="md"
       rounded="md"
@@ -58,4 +62,17 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+function App() {
+  return (
+    <ChakraProvider>
+      <Sidebar />
+    </ChakraProvider>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
