@@ -29,7 +29,7 @@ const Sidebar = () => {
 
   return (
     <Box
-      w="200px"
+      w= { "200px" }
       bg={bg}
       boxShadow="md"
       rounded="md"
