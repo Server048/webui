@@ -6,6 +6,7 @@ import {
   CloseButton,
   Image,
   Card,
+  Icon,
   useDisclosure,
   useBreakpointValue,
   List,
@@ -31,16 +32,7 @@ import {
   Skeleton,
   Text,
 } from '@chakra-ui/react';
-import {
-  FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
-  FiMenu,
-  FiBell,
-  FiChevronDown,
-} from 'react-icons/fi';
+
 import { IconType } from 'react-icons';
 import { config } from '@/config/common';
 import { useGuilds } from '@/api/hooks';
