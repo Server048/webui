@@ -50,7 +50,7 @@ import { NextPageWithLayout } from '@/pages/_app';
 import AppLayout from '@/components/layout/app';
 import { iconUrl } from '@/api/discord';
 import Link from 'next/link';
-
+import { useState } from 'react';
 
 interface LinkItemProps {
   name: string;
@@ -99,7 +99,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} href={link.href}> {/* Meneruskan href ke NavItem */}
+        <NavItem key={link.name} icon={link.icon} onClick={() => setActiveContent(link.content)}>
           {link.name}
         </NavItem>
       ))}
@@ -109,8 +109,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 
 const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => { // Menambahkan href
   return (
-    <Link href={href || '#'}> {/* Menggunakan href untuk Link, default ke '#' jika tidak didefinisikan */}
-      <Box as="a" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+     <Box as="a" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
         <Flex
           align="center"
           p="4"
@@ -195,6 +194,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 
 const SidebarWithHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [activeContent, setActiveContent] = useState(LinkItems[0].content); // State untuk konten aktif
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
@@ -213,6 +213,7 @@ const SidebarWithHeader = () => {
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {/* Konten */}
+        <Stack>{activeContent}</Stack>
         <Text>Bekerja Sekarang</Text> {/* Ditambahkan untuk debugging */}
       </Box>
     </Box>
