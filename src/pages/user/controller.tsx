@@ -1,68 +1,63 @@
-import {
-  Heading,
-  Button,
-  Card,
-  CardHeader,
-  Avatar,
-  Flex,
-  SimpleGrid,
-  Skeleton,
-  Text,
-} from '@chakra-ui/react';
-import { config } from '@/config/common';
-import { useGuilds } from '@/api/hooks';
-import HomeView from '@/config/example/HomeView';
 import { NextPageWithLayout } from '@/pages/_app';
 import AppLayout from '@/components/layout/app';
-import { iconUrl } from '@/api/discord';
+import { Box, Button, Flex, List, ListItem, Text, Avatar } from '@chakra-ui/react';
 import Link from 'next/link';
+import { HomeIcon, SettingsIcon, RocketIcon, DocumentIcon, LogoutIcon } from '@chakra-ui/icons';
 
-const HomePage: NextPageWithLayout = () => {
-  //used for example only, you should remove it
-  return <HomeView />;
 
-  return <GuildSelect />;
+const PanelKontrol: NextPageWithLayout = () => {
+  return (
+    <Box bg="gray.800" w="200px" h="full" p={4}> {/* Kontainer panel samping */}
+      <Flex mb={4} align="center">
+        <Avatar src="/profile.jpg" size="md" mr={2} /> {/* Ganti dengan path gambar profil Anda */}
+        <Text color="white" fontWeight="bold">GrowTree - PS</Text>
+      </Flex>
+      <Text color="gray.400" fontSize="sm" mb={4}>Kelola bot Discord Anda</Text>
+      <List spacing={3}>
+        <ListItem>
+          <Link href="/dashboard">
+            <Button variant="link" colorScheme="purple" leftIcon={<HomeIcon />} w="full">Dasbor</Button>
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Link href="/perintah-bot">
+            <Button variant="link" colorScheme="purple" leftIcon={<DocumentIcon />} w="full">Perintah Bot</Button>
+          </Link>
+        </ListItem>
+        {/* Tambahkan item daftar lainnya sesuai kebutuhan */}
+        <ListItem>
+          <Link href="/log-bot">
+            <Button variant="link" colorScheme="purple" leftIcon={<DocumentIcon />} w="full">Log Bot</Button>
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Link href="/log-pengguna">
+            <Button variant="link" colorScheme="purple" leftIcon={<DocumentIcon />} w="full">Log Pengguna</Button>
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Link href="/uji-bot">
+            <Button variant="link" colorScheme="purple" leftIcon={<RocketIcon />} w="full">Uji Bot</Button>
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Link href="/ekspor-bot">
+            <Button variant="link" colorScheme="purple" leftIcon={<DocumentIcon />} w="full">Ekspor Bot</Button>
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Link href="/pengaturan">
+            <Button variant="link" colorScheme="purple" leftIcon={<SettingsIcon />} w="full">Pengaturan</Button>
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Button variant="link" colorScheme="purple" leftIcon={<LogoutIcon />} w="full">Keluar</Button> {/* Tambahkan fungsionalitas keluar */}
+        </ListItem>
+      </List>
+    </Box>
+  );
 };
 
-export function GuildSelect() {
-  const guilds = useGuilds();
+PanelKontrol.getLayout = (page) => <AppLayout>{page}</AppLayout>;
 
-  if (guilds.status === 'success')
-    return (
-      <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} gap={3}>
-        {guilds.data
-          ?.filter((guild) => config.guild.filter(guild))
-          .map((guild) => (
-            <Card key={guild.id} variant="primary" as={Link} href={`/guilds/${guild.id}`}>
-              <CardHeader as={Flex} flexDirection="row" gap={3}>
-                <Avatar src={iconUrl(guild)} name={guild.name} size="md" />
-                <Text>{guild.name}</Text>
-              </CardHeader>
-            </Card>
-          ))}
-      </SimpleGrid>
-    );
-
-  if (guilds.status === 'error')
-    return (
-      <Button w="fit-content" variant="danger" onClick={() => guilds.refetch()}>
-        Try Again
-      </Button>
-    );
-
-  if (guilds.status === 'loading')
-    return (
-      <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} gap={3}>
-        <Skeleton minH="88px" rounded="2xl" />
-        <Skeleton minH="88px" rounded="2xl" />
-        <Skeleton minH="88px" rounded="2xl" />
-        <Skeleton minH="88px" rounded="2xl" />
-        <Skeleton minH="88px" rounded="2xl" />
-      </SimpleGrid>
-    );
-
-  return <></>;
-}
-
-HomePage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
-export default HomePage;
+export default PanelKontrol;
