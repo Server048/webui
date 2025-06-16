@@ -55,13 +55,13 @@ import Link from 'next/link';
 interface LinkItemProps {
   name: string;
   icon: IconType;
-  href?: string; // Menambahkan properti href
+  href?: string; // Added href property
 }
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: React.ReactNode;
-  href?: string; // Menambahkan properti href
+  href?: string; // Added href property
 }
 
 interface MobileProps extends FlexProps {
@@ -73,8 +73,8 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, href: '/' }, // Menambahkan href
-  { name: 'Profile', icon: FiTrendingUp, href: '/profile' }, // Menambahkan href
+  { name: 'Home', icon: FiHome, href: '/' }, // Added href
+  { name: 'Profile', icon: FiTrendingUp, href: '/profile' }, // Added href
   { name: 'Connect', icon: FiCompass, href: '#' },
   { name: 'Controller', icon: FiSettings, href: '#' },
   { name: 'Settings', icon: FiSettings, href: '#' },
@@ -99,7 +99,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} href={link.href}> {/* Meneruskan href ke NavItem */}
+        <NavItem key={link.name} icon={link.icon} href={link.href}> {/* Pass href to NavItem */}
           {link.name}
         </NavItem>
       ))}
@@ -107,9 +107,9 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   );
 };
 
-const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => { // Menambahkan href
+const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => { // Added href
   return (
-    <Link href={href || '#'}> {/* Menggunakan href untuk Link, default ke '#' jika tidak didefinisikan */}
+    <Link href={href || '#'}> {/* Use href for Link, default to '#' if undefined */}
       <Box as="a" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
         <Flex
           align="center"
@@ -212,8 +212,8 @@ const SidebarWithHeader = () => {
       </Drawer>
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        {/* Konten */}
-        <Text>Bekerja Sekarang</Text> {/* Ditambahkan untuk debugging */}
+        {/* Content */}
+        <Text>Bekerja Sekarang</Text> {/* Added for debugging */}
       </Box>
     </Box>
   );
