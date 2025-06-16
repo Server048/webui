@@ -20,10 +20,10 @@ import Link from 'next/link';
 const HomePage: NextPageWithLayout = () => {
   
 
-  return <GuildSelect />;
+  return <PanelKontrol />;
 };
 
-export function GuildSelect() {
+export function PanelKontrol() {
   const guilds = useGuilds();
 
 
