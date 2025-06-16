@@ -71,11 +71,11 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Profile', icon: FiTrendingUp },
-  { name: 'Connect', icon: FiCompass },
-  { name: 'Controller', icon: FiSettings },
-  { name: 'Settings', icon: FiSettings },
+  { name: 'Home', icon: FiHome, href: '/' }, // href untuk Home
+  { name: 'Profile', icon: FiTrendingUp, href: '/profile' }, // href untuk Profile
+  { name: 'Connect', icon: FiCompass, href: '#' },
+  { name: 'Controller', icon: FiSettings, href: '#' },
+  { name: 'Settings', icon: FiSettings, href: '#' },
 ];
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
