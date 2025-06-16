@@ -184,15 +184,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   );
 };
 
-
-
-const HomePage: NextPageWithLayout = () => {
-  
-
-  return <con />;
-};
-
-  export function con() {
 const SidebarWithHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -219,9 +210,13 @@ const SidebarWithHeader = () => {
   );
 };
 
-    return <></>;
-}
+const HomePage: NextPageWithLayout = () => {
+  
 
+  return <SidebarWithHeader />;
+};
+
+  
 
 
 HomePage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
