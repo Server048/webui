@@ -7,7 +7,6 @@ import {
   Image,
   Card,
   Icon,
-  useDisclosure,
   useBreakpointValue,
   List,
   HStack,
