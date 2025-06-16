@@ -109,6 +109,7 @@ const NavItem = ({ icon, children, href, ...rest }: NavItemProps & { href: strin
       e.preventDefault();
       router.push(href);
     }}> {/* Menggunakan div untuk menghindari konflik dengan next/link */}
+      <Box as="a" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}> {/* Box dibuka di sini */}
       <Flex
         align="center"
         p="4"
@@ -124,8 +125,9 @@ const NavItem = ({ icon, children, href, ...rest }: NavItemProps & { href: strin
         )}
         {children}
       </Flex>
+        </Box>
       </div>
-    </Box>
+    
   );
 };
 
