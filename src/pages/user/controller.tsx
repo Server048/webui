@@ -107,7 +107,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 
 const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
   return (
-    <Box as="a" href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+    <Box as="a" href="https://github.com/fuma-nama/discord-bot-dashboard-next/blob/master/src/pages/user/profile.tsx" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
       <Flex
         align="center"
         p="4"
