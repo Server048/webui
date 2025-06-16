@@ -7,9 +7,9 @@ import { HomeIcon, SettingsIcon, RocketIcon, DocumentIcon, LogoutIcon } from '@c
 
 const PanelKontrol: NextPageWithLayout = () => {
   return (
-    <Box bg="gray.800" w="200px" h="full" p={4}> {/* Kontainer panel samping */}
+    <Box bg="gray.800" w="200px" h="full" p={4}>
       <Flex mb={4} align="center">
-        <Avatar src="/profile.jpg" size="md" mr={2} /> {/* Ganti dengan path gambar profil Anda */}
+        <Avatar src="/profile.jpg" size="md" mr={2} />
         <Text color="white" fontWeight="bold">GrowTree - PS</Text>
       </Flex>
       <Text color="gray.400" fontSize="sm" mb={4}>Kelola bot Discord Anda</Text>
@@ -24,7 +24,7 @@ const PanelKontrol: NextPageWithLayout = () => {
             <Button variant="link" colorScheme="purple" leftIcon={<DocumentIcon />} w="full">Perintah Bot</Button>
           </Link>
         </ListItem>
-        {/* Tambahkan item daftar lainnya sesuai kebutuhan */}
+  
         <ListItem>
           <Link href="/log-bot">
             <Button variant="link" colorScheme="purple" leftIcon={<DocumentIcon />} w="full">Log Bot</Button>
@@ -51,7 +51,7 @@ const PanelKontrol: NextPageWithLayout = () => {
           </Link>
         </ListItem>
         <ListItem>
-          <Button variant="link" colorScheme="purple" leftIcon={<LogoutIcon />} w="full">Keluar</Button> {/* Tambahkan fungsionalitas keluar */}
+          <Button variant="link" colorScheme="purple" leftIcon={<LogoutIcon />} w="full">Keluar</Button>
         </ListItem>
       </List>
     </Box>
