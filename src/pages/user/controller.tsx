@@ -162,6 +162,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 /> {/* GANTI DENGAN URL GAMBAR YANG VALID */}
                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
                   <Text fontSize="sm" color="gray.600">
+                    {user.username}
   {user.username === "thedeviltime" ? "Admin" : "Free"}
 </Text>
 
