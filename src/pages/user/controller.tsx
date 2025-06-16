@@ -6,15 +6,15 @@ import { iconUrl } from '@/api/discord';
 import HomeView from '@/config/example/HomeView';
 import { config } from '@/config/common';
 import { useGuilds } from '@/api/hooks';
-import { HomeIcon, SettingsIcon, RocketIcon, DocumentIcon, LogoutIcon, SimpleGrid } from '@chakra-ui/icons';
+import { HomeIcon, Skeleton, SettingsIcon, RocketIcon, DocumentIcon, LogoutIcon, SimpleGrid } from '@chakra-ui/icons';
 
 
 const PanelKontrol: NextPageWithLayout = () => {
   return <HomeView />;
 
-  return <controller />;
+  return <PanelKontrol />;
 };
-export function controller() {
+export function PanelKontrol() {
   const guilds = useGuilds();
     
   if (guilds.status === 'loading')
