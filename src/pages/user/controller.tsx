@@ -30,6 +30,7 @@ import {
   SimpleGrid,
   Skeleton,
   Text,
+  Stack,
 } from '@chakra-ui/react';
 import {
   FiHome,
@@ -49,19 +50,19 @@ import { useSelfUser } from '@/api/hooks';
 import { NextPageWithLayout } from '@/pages/_app';
 import AppLayout from '@/components/layout/app';
 import { iconUrl } from '@/api/discord';
-import Link from 'next/link';
+import { useState } from 'react';
 
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
-  href?: string; // Menambahkan properti href
+  content: React.ReactNode; // Menambahkan properti content
 }
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: React.ReactNode;
-  href?: string; // Menambahkan properti href
+  onClick: () => void; // Mengganti href dengan onClick
 }
 
 interface MobileProps extends FlexProps {
@@ -73,11 +74,11 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, href: '/' }, // Menambahkan href
-  { name: 'Profile', icon: FiTrendingUp, href: '/profile' }, // Menambahkan href
-  { name: 'Connect', icon: FiCompass, href: '#' },
-  { name: 'Controller', icon: FiSettings, href: '#' },
-  { name: 'Settings', icon: FiSettings, href: '#' },
+  { name: 'Home', icon: FiHome, content: <HomeContent /> },
+  { name: 'Profile', icon: FiTrendingUp, content: <ProfileContent /> },
+  { name: 'Connect', icon: FiCompass, content: <ConnectContent /> },
+  { name: 'Controller', icon: FiSettings, content: <ControllerContent /> },
+  { name: 'Settings', icon: FiSettings, content: <SettingsContent /> },
 ];
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
@@ -99,7 +100,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} href={link.href}> {/* Meneruskan href ke NavItem */}
+        <NavItem key={link.name} icon={link.icon} onClick={() => setActiveContent(link.content)}>
           {link.name}
         </NavItem>
       ))}
@@ -107,27 +108,31 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   );
 };
 
-const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => { // Menambahkan href
+
+const NavItem = ({ icon, children, onClick, ...rest }: NavItemProps) => {
   return (
-    <Link href={href || '#'}> {/* Menggunakan href untuk Link, default ke '#' jika tidak didefinisikan */}
-      <Box as="a" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
-        <Flex
-          align="center"
-          p="4"
-          mx="4"
-          borderRadius="lg"
-          role="group"
-          cursor="pointer"
-          _hover={{ bg: 'cyan.400', color: 'white' }}
-          {...rest}
-        >
-          {icon && (
-            <Icon mr="4" fontSize="16" _groupHover={{ color: 'white' }} as={icon} />
-          )}
-          {children}
-        </Flex>
-      </Box>
-    </Link>
+    <Box
+      as="a"
+      style={{ textDecoration: 'none' }}
+      _focus={{ boxShadow: 'none' }}
+      onClick={onClick}
+    >
+      <Flex
+        align="center"
+        p="4"
+        mx="4"
+        borderRadius="lg"
+        role="group"
+        cursor="pointer"
+        _hover={{ bg: 'cyan.400', color: 'white' }}
+        {...rest}
+      >
+        {icon && (
+          <Icon mr="4" fontSize="16" _groupHover={{ color: 'white' }} as={icon} />
+        )}
+        {children}
+      </Flex>
+    </Box>
   );
 };
 
@@ -162,16 +167,11 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
           <Menu>
             <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: 'none' }}>
               <HStack>
-                <Avatar
-                  size={'sm'}
-                  src={avatarUrl(user)}
-                />
+                <Avatar size={'sm'} src={avatarUrl(user)} />
                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
-                  <Text fontSize="sm">
-                    {user.username}
-                  </Text>
+                  <Text fontSize="sm">{user.username}</Text>
                   <Text fontSize="xs" color="gray.600">
-                    {user.username === "thedeviltime" ? "Admin" : "Free"}
+                    {user.username === 'thedeviltime' ? 'Admin' : 'Free'}
                   </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
@@ -195,6 +195,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 
 const SidebarWithHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [activeContent, setActiveContent] = useState(LinkItems[0].content); // State untuk konten aktif
+
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
@@ -212,8 +214,8 @@ const SidebarWithHeader = () => {
       </Drawer>
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        {/* Konten */}
-        <Text>Bekerja Sekarang</Text> {/* Ditambahkan untuk debugging */}
+        {/* Konten dinamis */}
+        <Stack>{activeContent}</Stack>
       </Box>
     </Box>
   );
@@ -225,3 +227,10 @@ const HomePage: NextPageWithLayout = () => {
 
 HomePage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
 export default HomePage;
+
+
+const HomeContent = () => <Text>Ini adalah konten Home.</Text>;
+const ProfileContent = () => <Text>Ini fungsi profile.</Text>;
+const ConnectContent = () => <Text>Ini adalah konten Connect.</Text>;
+const ControllerContent = () => <Text>Ini adalah konten Controller.</Text>;
+const SettingsContent = () => <Text>Ini adalah konten Settings.</Text>;
