@@ -74,7 +74,7 @@ interface SidebarProps extends BoxProps {
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, href: '/' }, // Menambahkan href
-  { name: 'Profile', icon: FiTrendingUp, href: '/profile' }, // Menambahkan href
+  { name: 'Profile', icon: FiTrendingUp, href: 'user/profile' }, // Menambahkan href
   { name: 'Connect', icon: FiCompass, href: '#' },
   { name: 'Controller', icon: FiSettings, href: '#' },
   { name: 'Settings', icon: FiSettings, href: '#' },
