@@ -55,7 +55,7 @@ import Link from 'next/link';
 interface LinkItemProps {
   name: string;
   icon: IconType;
-  href?: string; // Menambahkan properti href
+  content: React.ReactNode; // Menambahkan properti content
 }
 
 interface NavItemProps extends FlexProps {
