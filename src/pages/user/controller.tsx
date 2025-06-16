@@ -1,6 +1,9 @@
 import {
   Heading,
+  Box,
   Button,
+  IconButton,
+  Image,
   Card,
   CardHeader,
   Avatar,
