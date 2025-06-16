@@ -50,7 +50,7 @@ import { NextPageWithLayout } from '@/pages/_app';
 import AppLayout from '@/components/layout/app';
 import { iconUrl } from '@/api/discord';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRef, useState } from 'react'; // Tambahkan useRef dan useState
 
 interface LinkItemProps {
   name: string;
@@ -101,18 +101,27 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} href={link.href} onClose={onClose} /> {/* Pass onClose */}
+        <NavItem key={link.name} icon={link.icon} href={link.href} />
+      ))}
     </Box>
   );
 };
 
-const NavItem = ({ icon, children, href, ...rest }: NavItemProps & { href: string }) => {
-  const router = useRouter();
+const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => {
+  const [isActive, setIsActive] = useState(false); // State untuk menandai item aktif
+  const ref = useRef<HTMLDivElement>(null); // Ref untuk elemen NavItem
+
   return (
-    <div onClick={(e) => {
-      e.preventDefault();
-      router.push(href);
-    }}>
+    <div
+      ref={ref}
+      onClick={(e) => {
+        setIsActive(true); // Set state menjadi true saat diklik
+        setTimeout(() => setIsActive(false), 100); // Set state menjadi false setelah 100ms (untuk menghindari highlight yang terlalu lama)
+        // ... navigasi ...
+      }}
+      className={isActive ? "active" : ""} // Tambahkan class active untuk styling
+      style={{textDecoration: 'none'}}
+    >
       <Box as="a" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
         <Flex
           align="center"
