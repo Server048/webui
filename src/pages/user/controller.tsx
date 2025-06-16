@@ -127,7 +127,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
-  const { data: user, isLoading, error } = useSelfUser();
+  const user = useSelfUser();
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -162,8 +162,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 /> {/* GANTI DENGAN URL GAMBAR YANG VALID */}
                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
                   <Text fontSize="sm" color="gray.600">
-        {user?.username === "thedeviltime" ? 'Admin' : 'Pengguna'}
-      </Text>
+  {user.username === "thedeviltime" ? "Admin" : "Free"}
+</Text>
+
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
                   <FiChevronDown />
