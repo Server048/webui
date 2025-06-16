@@ -42,6 +42,7 @@ import {
   FiChevronDown,
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
+import { avatarUrl, bannerUrl } from '@/api/discord';
 import { config } from '@/config/common';
 import { useGuilds } from '@/api/hooks';
 import { useSelfUser } from '@/api/hooks';
@@ -158,7 +159,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               <HStack>
                 <Avatar
                   size={'sm'}
-                  src={'https://bit.ly/sage-adebayo'}
+                  src={avatarUrl(user)}
                 /> {/* GANTI DENGAN URL GAMBAR YANG VALID */}
                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
                   <Text fontSize="sm">
