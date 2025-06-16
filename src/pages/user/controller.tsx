@@ -161,10 +161,10 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   src={'https://bit.ly/sage-adebayo'}
                 /> {/* GANTI DENGAN URL GAMBAR YANG VALID */}
                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
-                  <Text fontWeight="600" fontSize="2xl">
+                  <Text fontSize="sm">
             {user.username}
           </Text>
-                  <Text fontSize="xs" color="gray.600">
+                  <Text fontSize="sm" color="gray.600">
                     Admin
                   </Text>
                 </VStack>
