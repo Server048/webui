@@ -50,7 +50,7 @@ import { NextPageWithLayout } from '@/pages/_app';
 import AppLayout from '@/components/layout/app';
 import { iconUrl } from '@/api/discord';
 import Link from 'next/link';
-
+import { useRouter } from 'next/router';
 
 interface LinkItemProps {
   name: string;
@@ -97,17 +97,20 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
-          {link.name}
-        </NavItem>
-      ))}
+        <NavItem key={link.name} icon={link.icon} href={link.href} onClose={onClose} /> {/* Pass onClose */}
     </Box>
   );
 };
 
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, children, href, onClose, ...rest }: NavItemProps & { onClose: () => void }) => {
+  const router = useRouter();
   return (
-    <Box as="a" href="https://github.com/fuma-nama/discord-bot-dashboard-next/blob/master/src/pages/user/profile.tsx" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+    <Link href={href || '#'}>
+      <Box as="a" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }} onClick={(e) => {
+          e.preventDefault();
+          router.push(href || '#');
+          // onClose(); // Panggil onClose setelah navigasi selesai, jika dibutuhkan
+      }}>
       <Flex
         align="center"
         p="4"
