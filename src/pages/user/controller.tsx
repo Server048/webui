@@ -61,7 +61,7 @@ interface LinkItemProps {
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: React.ReactNode;
-  href?: string; // Menambahkan properti href
+  onClick: () => void; // Mengganti href dengan onClick
 }
 
 interface MobileProps extends FlexProps {
