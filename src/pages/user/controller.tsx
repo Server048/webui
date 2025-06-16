@@ -17,6 +17,16 @@ import {
   Skeleton,
   Text,
 } from '@chakra-ui/react';
+import {
+  HamburgerIcon,
+  CloseIcon,
+  HomeIcon,
+  SettingsIcon,
+  RocketIcon,
+  FileIcon,
+  DownloadIcon,
+  RepeatIcon,
+} from '@chakra-ui/icons';
 import { config } from '@/config/common';
 import { useGuilds } from '@/api/hooks';
 
