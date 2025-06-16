@@ -24,7 +24,7 @@ const HomePage: NextPageWithLayout = () => {
 };
 
 export function PanelKontrol() {
-  const guilds = useGuilds();
+  
 
 
   
