@@ -102,15 +102,13 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   );
 };
 
-const NavItem = ({ icon, children, href, onClose, ...rest }: NavItemProps & { onClose: () => void }) => {
+const NavItem = ({ icon, children, href, ...rest }: NavItemProps & { href: string }) => { // Memperbaiki type
   const router = useRouter();
   return (
-    <Link href={href || '#'}>
-      <Box as="a" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }} onClick={(e) => {
-          e.preventDefault();
-          router.push(href || '#');
-          // onClose(); // Panggil onClose setelah navigasi selesai, jika dibutuhkan
-      }}>
+    <div onClick={(e) => { //Menggunakan div bukan Link dari next/link
+      e.preventDefault();
+      router.push(href);
+    }}> {/* Menggunakan div untuk menghindari konflik dengan next/link */}
       <Flex
         align="center"
         p="4"
@@ -126,6 +124,7 @@ const NavItem = ({ icon, children, href, onClose, ...rest }: NavItemProps & { on
         )}
         {children}
       </Flex>
+      </div>
     </Box>
   );
 };
