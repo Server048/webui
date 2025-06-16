@@ -44,7 +44,7 @@ import {
 import { IconType } from 'react-icons';
 import { config } from '@/config/common';
 import { useGuilds } from '@/api/hooks';
-
+import { useSelfUser } from '@/api/hooks';
 import { NextPageWithLayout } from '@/pages/_app';
 import AppLayout from '@/components/layout/app';
 import { iconUrl } from '@/api/discord';
@@ -127,6 +127,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const user = useSelfUser();
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -160,7 +161,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   src={'https://bit.ly/sage-adebayo'}
                 /> {/* GANTI DENGAN URL GAMBAR YANG VALID */}
                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontWeight="600" fontSize="2xl">
+            {user.username}
+          </Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>
