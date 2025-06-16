@@ -1,11 +1,3 @@
-import { NextPageWithLayout } from '@/pages/_app';
-import AppLayout from '@/components/layout/app';
-import { Box, Button, Flex, List, ListItem, Text, Avatar } from '@chakra-ui/react';
-import Link from 'next/link';
-import { iconUrl } from '@/api/discord';
-import HomeView from '@/config/example/HomeView';
-import { config } from '@/config/common';
-import { useGuilds } from '@/api/hooks';
 import {
   Heading,
   Button,
@@ -17,16 +9,25 @@ import {
   Skeleton,
   Text,
 } from '@chakra-ui/react';
+import { config } from '@/config/common';
+import { useGuilds } from '@/api/hooks';
+import HomeView from '@/config/example/HomeView';
+import { NextPageWithLayout } from '@/pages/_app';
+import AppLayout from '@/components/layout/app';
+import { iconUrl } from '@/api/discord';
+import Link from 'next/link';
 
-
-const PanelKontrol: NextPageWithLayout = () => {
+const HomePage: NextPageWithLayout = () => {
+  //used for example only, you should remove it
   return <HomeView />;
 
-  return <PanelKontrol />;
+  return <GuildSelect />;
 };
-export function PanelKontrol() {
+
+export function GuildSelect() {
   const guilds = useGuilds();
-      if (guilds.status === 'success')
+
+  if (guilds.status === 'success')
     return (
       <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} gap={3}>
         {guilds.data
@@ -48,6 +49,7 @@ export function PanelKontrol() {
         Try Again
       </Button>
     );
+
   if (guilds.status === 'loading')
     return (
       <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} gap={3}>
@@ -58,10 +60,9 @@ export function PanelKontrol() {
         <Skeleton minH="88px" rounded="2xl" />
       </SimpleGrid>
     );
+
   return <></>;
 }
 
-
-PanelKontrol.getLayout = (page) => <AppLayout>{page}</AppLayout>;
-
-export default PanelKontrol;
+HomePage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
+export default HomePage;
