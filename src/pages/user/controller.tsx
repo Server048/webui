@@ -55,11 +55,14 @@ import { useRouter } from 'next/router';
 interface LinkItemProps {
   name: string;
   icon: IconType;
+  href: string;
 }
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: React.ReactNode;
+  href: string;
+  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 interface MobileProps extends FlexProps {
@@ -69,6 +72,7 @@ interface MobileProps extends FlexProps {
 interface SidebarProps extends BoxProps {
   onClose: () => void;
 }
+
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, href: '#' }, // href untuk Home
