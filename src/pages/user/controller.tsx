@@ -27,16 +27,7 @@ export function GuildSelect() {
   const guilds = useGuilds();
 
 
-  if (guilds.status === 'loading')
-    return (
-      <SimpleGrid columns={{ base: 1, md: 2, xl: 3 }} gap={3}>
-        <Skeleton minH="88px" rounded="2xl" />
-        <Skeleton minH="88px" rounded="2xl" />
-        <Skeleton minH="88px" rounded="2xl" />
-        <Skeleton minH="88px" rounded="2xl" />
-        <Skeleton minH="88px" rounded="2xl" />
-      </SimpleGrid>
-    );
+  
 
   return <></>;
 }
