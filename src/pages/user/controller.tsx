@@ -219,9 +219,18 @@ const SidebarWithHeader = () => {
   );
 };
 
+
+const HomeContent = () => <Text>Ini adalah konten Home.</Text>;
+const ProfileContent = () => <Text>Ini fungsi profile.</Text>;
+const ConnectContent = () => <Text>Ini adalah konten Connect.</Text>;
+const ControllerContent = () => <Text>Ini adalah konten Controller.</Text>;
+const SettingsContent = () => <Text>Ini adalah konten Settings.</Text>;
+
 const HomePage: NextPageWithLayout = () => {
   return <SidebarWithHeader />;
 };
 
 HomePage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
 export default HomePage;
+
+
