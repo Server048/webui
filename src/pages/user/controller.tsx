@@ -185,13 +185,15 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 };
 
 
+
 const HomePage: NextPageWithLayout = () => {
   
 
-  return <SidebarWithHeader />;
+  return <con />;
 };
 
-  const SidebarWithHeader = () => {
+  export function con() {
+const SidebarWithHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -216,6 +218,10 @@ const HomePage: NextPageWithLayout = () => {
     </Box>
   );
 };
+
+    return <></>;
+}
+
 
 
 HomePage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
