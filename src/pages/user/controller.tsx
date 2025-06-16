@@ -188,10 +188,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 const HomePage: NextPageWithLayout = () => {
   
 
-  return <Controller />;
+  return <SidebarWithHeader />;
 };
 
-export function Controller() {
   const SidebarWithHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -218,11 +217,6 @@ export function Controller() {
   );
 };
 
-
-  
-
-  return <></>;
-}
 
 HomePage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
 export default HomePage;
