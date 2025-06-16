@@ -6,7 +6,11 @@ import { HomeIcon, SettingsIcon, RocketIcon, DocumentIcon, LogoutIcon } from '@c
 
 
 const PanelKontrol: NextPageWithLayout = () => {
-  return (
+  
+  return <controller />;
+};
+export function controller() {
+  
     <Box bg="gray.800" w="200px" h="full" p={4}>
       <Flex mb={4} align="center">
         <Avatar src="/profile.jpg" size="md" mr={2} />
@@ -55,8 +59,10 @@ const PanelKontrol: NextPageWithLayout = () => {
         </ListItem>
       </List>
     </Box>
-  );
-};
+  
+  return <></>;
+}
+
 
 PanelKontrol.getLayout = (page) => <AppLayout>{page}</AppLayout>;
 
