@@ -11,7 +11,7 @@ import {
   List,
   HStack,
   Drawer,
-  FlexProps,
+  Flex,
   Menu,
   MenuButton,
   MenuDivider,
@@ -26,7 +26,6 @@ import {
   ListIcon,
   CardHeader,
   Avatar,
-  Flex,
   SimpleGrid,
   Skeleton,
   Text,
@@ -84,7 +83,7 @@ const itemMenus: Array<ItemMenuProps> = [
 const SidebarKonten = ({ tutupDrawer, aturKontenAktif, ...rest }: SidebarProps) => {
   return (
     <Box
-      
+      transition="3s ease"
       bg={useColorModeValue('white', 'gray.900')}
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
@@ -190,7 +189,6 @@ const MobileNav = ({ bukaDrawer, ...rest }: MobileProps) => {
 const SidebarDenganHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [kontenAktif, setKontenAktif] = useState(itemMenus[0].konten);
-
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarKonten tutupDrawer={onClose} aturKontenAktif={setKontenAktif} display={{ base: 'none', md: 'block' }} />
@@ -219,6 +217,7 @@ const HomePage: NextPageWithLayout = () => {
 };
 
 HomePage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
+
 export default HomePage;
 
 const KontenBeranda = () => <Text>Ini adalah konten Beranda.</Text>;
