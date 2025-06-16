@@ -55,11 +55,13 @@ import Link from 'next/link';
 interface LinkItemProps {
   name: string;
   icon: IconType;
+  href?: string; // Menambahkan properti href
 }
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: React.ReactNode;
+  href?: string; // Menambahkan properti href
 }
 
 interface MobileProps extends FlexProps {
@@ -71,11 +73,11 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Profile', icon: FiTrendingUp },
-  { name: 'Connect', icon: FiCompass },
-  { name: 'Controller', icon: FiSettings },
-  { name: 'Settings', icon: FiSettings },
+  { name: 'Home', icon: FiHome, href: '/' }, // Menambahkan href
+  { name: 'Profile', icon: FiTrendingUp, href: '/profile' }, // Menambahkan href
+  { name: 'Connect', icon: FiCompass, href: '#' },
+  { name: 'Controller', icon: FiSettings, href: '#' },
+  { name: 'Settings', icon: FiSettings, href: '#' },
 ];
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
@@ -97,7 +99,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem key={link.name} icon={link.icon} href={link.href}> {/* Meneruskan href ke NavItem */}
           {link.name}
         </NavItem>
       ))}
@@ -105,25 +107,27 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   );
 };
 
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => { // Menambahkan href
   return (
-    <Box as="a" href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
-      <Flex
-        align="center"
-        p="4"
-        mx="4"
-        borderRadius="lg"
-        role="group"
-        cursor="pointer"
-        _hover={{ bg: 'cyan.400', color: 'white' }}
-        {...rest}
-      >
-        {icon && (
-          <Icon mr="4" fontSize="16" _groupHover={{ color: 'white' }} as={icon} />
-        )}
-        {children}
-      </Flex>
-    </Box>
+    <Link href={href || '#'}> {/* Menggunakan href untuk Link, default ke '#' jika tidak didefinisikan */}
+      <Box as="a" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+        <Flex
+          align="center"
+          p="4"
+          mx="4"
+          borderRadius="lg"
+          role="group"
+          cursor="pointer"
+          _hover={{ bg: 'cyan.400', color: 'white' }}
+          {...rest}
+        >
+          {icon && (
+            <Icon mr="4" fontSize="16" _groupHover={{ color: 'white' }} as={icon} />
+          )}
+          {children}
+        </Flex>
+      </Box>
+    </Link>
   );
 };
 
@@ -148,6 +152,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         aria-label="open menu"
         icon={<FiMenu />}
       />
+
       <Text display={{ base: 'flex', md: 'none' }} fontSize="2xl" fontFamily="monospace" fontWeight="bold">
         BOT CONTROLLER CPS
       </Text>
@@ -160,15 +165,14 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 <Avatar
                   size={'sm'}
                   src={avatarUrl(user)}
-                /> {/* GANTI DENGAN URL GAMBAR YANG VALID */}
+                />
                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
                   <Text fontSize="sm">
                     {user.username}
-                    </Text>
+                  </Text>
                   <Text fontSize="xs" color="gray.600">
-  {user.username === "thedeviltime" ? "Admin" : "Free"}
-</Text>
-
+                    {user.username === "thedeviltime" ? "Admin" : "Free"}
+                  </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
                   <FiChevronDown />
@@ -206,24 +210,18 @@ const SidebarWithHeader = () => {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        {/* Content */}
+        {/* Konten */}
+        <Text>Bekerja Sekarang</Text> {/* Ditambahkan untuk debugging */}
       </Box>
     </Box>
   );
 };
 
 const HomePage: NextPageWithLayout = () => {
-  
-
   return <SidebarWithHeader />;
 };
 
-  
-
-
 HomePage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
 export default HomePage;
-
