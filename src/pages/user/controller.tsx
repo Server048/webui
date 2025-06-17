@@ -72,8 +72,8 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, href: '/' }, // Menambahkan href
-  { name: 'Profile', icon: FiTrendingUp, href: '/profile' }, // Menambahkan href
+  { name: 'Home', icon: FiHome, href: '/' }, // Menggunakan href untuk navigasi
+  { name: 'Profile', icon: FiTrendingUp, href: '/profile' }, // Menggunakan href untuk navigasi
   { name: 'Connect', icon: FiCompass, href: '#' },
   { name: 'Controller', icon: FiSettings, href: '#' },
   { name: 'Settings', icon: FiSettings, href: '#' },
@@ -230,3 +230,17 @@ const HomePage: NextPageWithLayout = () => {
 HomePage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
 
 export default HomePage;
+
+// Konten untuk halaman
+const KontenBeranda = () => <Text>Ini adalah konten Beranda.</Text>;
+const KontenProfil = () => <Text>Ini fungsi profil.</Text>;
+const KontenHubungkan = () => <Text>Ini adalah konten Hubungkan.</Text>;
+const KontenPengontrol = () => <Text>Ini adalah konten Pengontrol.</Text>;
+const KontenPengaturan = () => <Text>Ini adalah konten Pengaturan.</Text>;
+
+// Komponen halaman
+const Beranda = () => <KontenBeranda />;
+const Profil = () => <KontenProfil />;
+const Hubungkan = () => <KontenHubungkan />;
+const Pengontrol = () => <KontenPengontrol />;
+const Pengaturan = () => <KontenPengaturan />;
