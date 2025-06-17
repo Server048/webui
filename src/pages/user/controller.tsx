@@ -29,7 +29,10 @@ interface MenuItem {
   icon?: React.ReactNode; // Optional icon
 }
 
-const menuItems: MenuItem[] = [
+
+
+const HomePage: NextPageWithLayout = () => {
+  const menuItems: MenuItem[] = [
   { label: 'Dashboard', path: '/', icon: <HomeIcon /> },
   { label: 'Perintah Bot', path: '/perintah', icon: <ArrowForwardIcon /> },
   { label: 'Log Bot', path: '/logbot', icon: <DocumentIcon /> },
@@ -39,8 +42,6 @@ const menuItems: MenuItem[] = [
   { label: 'Pengaturan', path: '/pengaturan', icon: <SettingsIcon /> },
   { label: 'Keluar', path: '/keluar', icon: <ExitIcon /> },
 ];
-
-const HomePage: NextPageWithLayout = () => {
 const Sidebar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>('/');
