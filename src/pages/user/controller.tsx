@@ -23,15 +23,16 @@ import { NextPageWithLayout } from '@/pages/_app';
 import AppLayout from '@/components/layout/app';
 
 
-interface MenuItem {
-  label: string;
-  path: string;
-  icon?: React.ReactNode; // Optional icon
-}
+
 
 
 
 const HomePage: NextPageWithLayout = () => {
+  interface MenuItem {
+  label: string;
+  path: string;
+  icon?: React.ReactNode; // Optional icon
+  }
   const menuItems: MenuItem[] = [
   { label: 'Dashboard', path: '/', icon: <HomeIcon /> },
   { label: 'Perintah Bot', path: '/perintah', icon: <ArrowForwardIcon /> },
