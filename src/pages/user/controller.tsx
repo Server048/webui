@@ -19,6 +19,9 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
+import { NextPageWithLayout } from '@/pages/_app';
+import AppLayout from '@/components/layout/app';
+
 
 interface MenuItem {
   label: string;
@@ -37,7 +40,7 @@ const menuItems: MenuItem[] = [
   { label: 'Keluar', path: '/keluar', icon: <ExitIcon /> },
 ];
 
-
+const HomePage: NextPageWithLayout = () => {
 const Sidebar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>('/');
@@ -85,6 +88,8 @@ const Sidebar = () => {
     </>
   );
 };
+        };
 
+HomePage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
 export default Sidebar;
 
