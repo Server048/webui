@@ -24,7 +24,7 @@ const ProfilePage = ({ growId, token, role, username, balance }: ProfilePageProp
     <Box p={6} maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" bg={useColorModeValue('white', 'gray.900')}>
       <Box p={6} bg={useColorModeValue('gray.50', 'gray.700')}>
         <Heading as="h2" fontSize="xl" mb={4}>
-          Profil Pengguna
+          Profil
         </Heading>
       </Box>
       <VStack p={6} spacing={4}>
