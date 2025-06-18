@@ -199,7 +199,7 @@ const SidebarWithHeader = () => {
   const user = useSelfUser();
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
-  }; // <-- Kurung kurawal penutup untuk handleTabChange
+  };
   const Konten = {
     home: () => <Text>Ini adalah konten Beranda.</Text>,
     profile: () => <Text>Ini fungsi profil. Username: {user.username}</Text>,
@@ -216,6 +216,15 @@ const SidebarWithHeader = () => {
           </NavItem>
         ))}
       </SidebarContent>
+      <Drawer isOpen={isOpen} placement="left" onClose={onClose} returnFocusOnClose={false} onOverlayClick={onClose} size="full">
+        <DrawerContent>
+          <SidebarContent onClose={onClose}>
+            {LinkItems.map((link) => (
+              <NavItem key={link.name} icon={link.icon} onClick={() => handleTabChange(link.value)} value={link.value}>
+                {link.name}
+              </NavItem>
+            ))}
+          </SidebarContent>
         </DrawerContent>
       </Drawer>
       <MobileNav onOpen={onOpen} />
@@ -226,6 +235,7 @@ const SidebarWithHeader = () => {
     </Box>
   );
 };
+
 
 const HomePage: NextPageWithLayout = () => {
   return <SidebarWithHeader />;
