@@ -168,6 +168,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 
 const SidebarWithHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const user = useSelfUser(); // Inisialisasi user di sini
   const [activeTab, setActiveTab] = useState('home');
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
