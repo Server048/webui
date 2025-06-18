@@ -46,7 +46,7 @@ import { IconType } from 'react-icons';
 import { avatarUrl, bannerUrl } from '@/api/discord';
 import { config } from '@/config/common';
 import { useGuilds } from '@/api/hooks';
-//import { useSelfUser } from '@/api/hooks';
+import { useSelfUser } from '@/api/hooks';
 import { NextPageWithLayout } from '@/pages/_app';
 import AppLayout from '@/components/layout/app';
 import { iconUrl } from '@/api/discord';
@@ -62,15 +62,12 @@ interface LinkItemProps {
 interface NavItemProps {
   icon: IconType;
   children: React.ReactNode;
-  onClick: (value: string) => void;  //Tipe onClick yang benar
+  onClick: (value: string) => void;  // Tipe onClick yang benar
 }
-
 
 interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
-
-
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Beranda', icon: FiHome, value: 'home' },
@@ -79,8 +76,6 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Pengontrol', icon: FiSettings, value: 'controller' },
   { name: 'Pengaturan', icon: FiSettings, value: 'settings' },
 ];
-
-
 
 const NavItem = ({ icon, children, onClick, value, ...rest }: NavItemProps & { value: string; [key: string]: any }) => {
   return (
@@ -105,7 +100,7 @@ const NavItem = ({ icon, children, onClick, value, ...rest }: NavItemProps & { v
 };
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
- // const user = useSelfUser();
+  const user = useSelfUser();
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -125,7 +120,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         aria-label="open menu"
         icon={<FiMenu />}
       />
-
       <Text display={{ base: 'flex', md: 'none' }} fontSize="2xl" fontFamily="monospace" fontWeight="bold">
         PENGATURAN BOT
       </Text>
@@ -137,14 +131,14 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               <HStack>
                 <Avatar
                   size={'sm'}
-                //  src={avatarUrl(user)}
+                  src={avatarUrl(user)}
                 />
                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
                   <Text fontSize="sm">
                     {user.username}
                   </Text>
                   <Text fontSize="xs" color="gray.600">
-                   
+                    {user.username === "thedeviltime" ? "Admin" : "Free"}
                   </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
@@ -166,23 +160,21 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   );
 };
 
-
-
 const SidebarWithHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-//  const user = useSelfUser(); // Inisialisasi user di sini
+  const user = useSelfUser(); // Inisialisasi user di sini
   const [activeTab, setActiveTab] = useState('home');
-  
- const handleTabChange = (tab: string) => {
+  const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
+
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} returnFocusOnClose={false} onOverlayClick={onClose} size="full">
-      <DrawerContent>
-        <SidebarContent onClose={onClose} handleTabChange={handleTabChange} /> {/* handleTabChange dilewatkan sebagai prop */}
-      </DrawerContent>
-    </Drawer>
+        <DrawerContent>
+          <SidebarContent onClose={onClose} handleTabChange={handleTabChange} />
+        </DrawerContent>
+      </Drawer>
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {Konten[activeTab]()}
@@ -192,17 +184,12 @@ const SidebarWithHeader = () => {
   );
 };
 
-
 interface SidebarProps extends BoxProps {
   onClose: () => void;
-  handleTabChange: (tab: string) => void; // Tambahkan handleTabChange di sini
+  handleTabChange: (tab: string) => void;
 }
 
-
-const SidebarContent = ({ onClose, handleTabChange, ...rest }: SidebarProps) => { // Terima handleTabChange sebagai prop
-  const handleTabChange = (tab: string) => {
-    setActiveTab(tab);
-  };
+const SidebarContent = ({ onClose, handleTabChange, ...rest }: SidebarProps) => {
   return (
     <Box
       transition="3s ease"
@@ -221,27 +208,26 @@ const SidebarContent = ({ onClose, handleTabChange, ...rest }: SidebarProps) => 
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-      <NavItem key={link.name} icon={link.icon} onClick={() => handleTabChange(link.value)} value={link.value}> {/* Panggil handleTabChange di sini */}
-        {link.name}
-      </NavItem>
-    ))}
+        <NavItem key={link.name} icon={link.icon} onClick={() => handleTabChange(link.value)} value={link.value}>
+          {link.name}
+        </NavItem>
+      ))}
     </Box>
   );
 };
 
-
- const Konten = {
-    home: () => <Text>Ini adalah konten Beranda.</Text>,
-    profile: () => <Text>Ini fungsi profil. Username</Text>,
-
-    connect: () => <Text>Ini adalah konten Hubungkan.</Text>,
-    controller: () => <Text>Ini adalah konten Pengontrol.</Text>,
-    settings: () => <Text>Ini adalah konten Pengaturan.</Text>,
-  };
+const Konten = {
+  home: () => <Text>Ini adalah konten Beranda.</Text>,
+  profile: () => <Text>Ini fungsi profil. Username</Text>,
+  connect: () => <Text>Ini adalah konten Hubungkan.</Text>,
+  controller: () => <Text>Ini adalah konten Pengontrol.</Text>,
+  settings: () => <Text>Ini adalah konten Pengaturan.</Text>,
+};
 
 const HomePage: NextPageWithLayout = () => {
   return <SidebarWithHeader />;
 };
 
 HomePage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
+
 export default HomePage;
