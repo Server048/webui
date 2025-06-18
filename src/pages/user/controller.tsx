@@ -50,7 +50,7 @@ import { NextPageWithLayout } from '@/pages/_app';
 import AppLayout from '@/components/layout/app';
 import { iconUrl } from '@/api/discord';
 import Link from 'next/link';
-
+import { useState } from 'react';
 
 interface LinkItemProps {
   name: string;
