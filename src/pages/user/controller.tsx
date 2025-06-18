@@ -175,7 +175,8 @@ const SidebarWithHeader = () => {
   };
   const Konten = {
     home: () => <Text>Ini adalah konten Beranda.</Text>,
-    profile: () => <Text>Ini fungsi profil. Username: {user.username}</Text>,
+    profile: () => <Text>Ini fungsi profil. Username: {user?.username || 'Tidak tersedia'}</Text>,
+
     connect: () => <Text>Ini adalah konten Hubungkan.</Text>,
     controller: () => <Text>Ini adalah konten Pengontrol.</Text>,
     settings: () => <Text>Ini adalah konten Pengaturan.</Text>,
