@@ -195,6 +195,13 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 
 const SidebarWithHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const Konten = {
+    home: () => <Text>Ini adalah konten Beranda.</Text>,
+    profile: () => <Text>Ini fungsi profil. Username: {user.username}</Text>,
+    connect: () => <Text>Ini adalah konten Hubungkan.</Text>,
+    controller: () => <Text>Ini adalah konten Pengontrol.</Text>,
+    settings: () => <Text>Ini adalah konten Pengaturan.</Text>,
+  };
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
