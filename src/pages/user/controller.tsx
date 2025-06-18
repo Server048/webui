@@ -16,7 +16,10 @@ import {
   MenuItem,
   MenuDivider,
   Skeleton,
+  Icon, // Add this import
 } from '@chakra-ui/react';
+// ... rest of your imports and code
+
 import { FiHome, FiTrendingUp, FiCompass, FiSettings, FiMenu, FiBell, FiChevronDown } from 'react-icons/fi';
 import { useRouter } from 'next/router';
 import { avatarUrl } from '@/api/discord';
