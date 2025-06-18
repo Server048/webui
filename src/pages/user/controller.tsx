@@ -46,7 +46,7 @@ import { IconType } from 'react-icons';
 import { avatarUrl, bannerUrl } from '@/api/discord';
 import { config } from '@/config/common';
 import { useGuilds } from '@/api/hooks';
-import { useSelfUser } from '@/api/hooks';
+//import { useSelfUser } from '@/api/hooks';
 import { NextPageWithLayout } from '@/pages/_app';
 import AppLayout from '@/components/layout/app';
 import { iconUrl } from '@/api/discord';
@@ -105,7 +105,7 @@ const NavItem = ({ icon, children, onClick, value, ...rest }: NavItemProps & { v
 };
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
-  const user = useSelfUser();
+ // const user = useSelfUser();
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -137,14 +137,14 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               <HStack>
                 <Avatar
                   size={'sm'}
-                  src={avatarUrl(user)}
+                //  src={avatarUrl(user)}
                 />
                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
                   <Text fontSize="sm">
                     {user.username}
                   </Text>
                   <Text fontSize="xs" color="gray.600">
-                    {user.username === "thedeviltime" ? "Admin" : "Free"}
+                   
                   </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
@@ -170,7 +170,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 
 const SidebarWithHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const user = useSelfUser(); // Inisialisasi user di sini
+//  const user = useSelfUser(); // Inisialisasi user di sini
   const [activeTab, setActiveTab] = useState('home');
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
