@@ -193,6 +193,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 
 const SidebarWithHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [activeTab, setActiveTab] = useState('home');
+  const user = useSelfUser();
+  const handleTabChange = (tab) => {setActiveTab(tab)};
   const Konten = {
     home: () => <Text>Ini adalah konten Beranda.</Text>,
     profile: () => <Text>Ini fungsi profil. Username: {user.username}</Text>,
@@ -202,22 +205,27 @@ const SidebarWithHeader = () => {
   };
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
-      <SidebarContent onClose={() => onClose} display={{ base: 'none', md: 'block' }} />
-      <Drawer
-        isOpen={isOpen}
-        placement="left"
-        onClose={onClose}
-        returnFocusOnClose={false}
-        onOverlayClick={onClose}
-        size="full"
-      >
+      <SidebarContent onClose={onClose} display={{ base: 'none', md: 'block' }}>
+        {LinkItems.map((link) => (
+          <NavItem key={link.name} icon={link.icon} onClick={handleTabChange}>
+            {link.name}
+          </NavItem>
+        ))}
+      </SidebarContent>
+      <Drawer isOpen={isOpen} placement="left" onClose={onClose} returnFocusOnClose={false} onOverlayClick={onClose} size="full">
         <DrawerContent>
-          <SidebarContent onClose={onClose} />
+          <SidebarContent onClose={onClose}>
+            {LinkItems.map((link) => (
+              <NavItem key={link.name} icon={link.icon} onClick={handleTabChange}>
+                {link.name}
+              </NavItem>
+            ))}
+          </SidebarContent>
         </DrawerContent>
       </Drawer>
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        {/* Konten */}
+        {Konten[activeTab]()}
         <Text>Bekerja Sekarang</Text> {/* Ditambahkan untuk debugging */}
       </Box>
     </Box>
