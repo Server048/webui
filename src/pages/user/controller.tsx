@@ -27,12 +27,13 @@ import AppLayout from '@/components/layout/app';
 
 
 
-const HomePage: NextPageWithLayout = () => {
+
   interface MenuItem {
   label: string;
   path: string;
   icon?: React.ReactNode; // Optional icon
   }
+
   const menuItems: MenuItem[] = [
   { label: 'Dashboard', path: '/', icon: <HomeIcon /> },
   { label: 'Perintah Bot', path: '/perintah', icon: <ArrowForwardIcon /> },
@@ -43,6 +44,8 @@ const HomePage: NextPageWithLayout = () => {
   { label: 'Pengaturan', path: '/pengaturan', icon: <SettingsIcon /> },
   { label: 'Keluar', path: '/keluar', icon: <ExitIcon /> },
 ];
+
+export default function HomeViewk() {
 const Sidebar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedMenuItem, setSelectedMenuItem] = useState<string>('/');
@@ -92,6 +95,6 @@ const Sidebar = () => {
 };
         };
 
-HomePage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
-export default Sidebar;
+
+      }
 
