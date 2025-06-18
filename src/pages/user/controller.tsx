@@ -197,7 +197,8 @@ const SidebarWithHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [activeTab, setActiveTab] = useState('home');
   const user = useSelfUser();
-  const handleTabChange = (tab) => {setActiveTab(tab)};
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
   const Konten = {
     home: () => <Text>Ini adalah konten Beranda.</Text>,
     profile: () => <Text>Ini fungsi profil. Username: {user.username}</Text>,
