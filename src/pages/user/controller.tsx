@@ -55,13 +55,13 @@ import { useState } from 'react';
 interface LinkItemProps {
   name: string;
   icon: IconType;
-  href?: string; // Menambahkan properti href
+  value: string;
 }
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: React.ReactNode;
-  href?: string; // Menambahkan properti href
+  onClick: (value: string) => void;
 }
 
 interface MobileProps extends FlexProps {
@@ -73,11 +73,11 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, href: '/' }, // Menambahkan href
-  { name: 'Profile', icon: FiTrendingUp, href: '/profile' }, // Menambahkan href
-  { name: 'Connect', icon: FiCompass, href: '#' },
-  { name: 'Controller', icon: FiSettings, href: '#' },
-  { name: 'Settings', icon: FiSettings, href: '#' },
+  { name: 'Home', icon: FiHome, value: 'home' },
+  { name: 'Profile', icon: FiTrendingUp, value: 'profile' },
+  { name: 'Connect', icon: FiCompass, value: 'connect' },
+  { name: 'Controller', icon: FiSettings, value: 'controller' },
+  { name: 'Settings', icon: FiSettings, value: 'settings' },
 ];
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
