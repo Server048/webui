@@ -82,7 +82,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Pengaturan', icon: FiSettings, value: 'settings' },
 ];
 
-const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+const SidebarContent = ({ onClose, handleTabChange, ...rest }: SidebarProps & { handleTabChange: (tab: string) => void }) => {
   return (
     <Box
       transition="3s ease"
@@ -105,7 +105,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           {link.name}
         </NavItem>
       ))}
-    </Box> // <-- Tag penutup </Box> ditambahkan di sini
+    </Box>
   );
 };
 
@@ -210,7 +210,9 @@ const SidebarWithHeader = () => {
   };
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
-      <SidebarContent onClose={onClose} display={{ base: 'none', md: 'block' }}>
+      <SidebarContent onClose={onClose} handleTabChange={handleTabChange} display={{ base: 'none', md: 'block' }}>
+        {/* ... */}
+      </SidebarContent>
         {LinkItems.map((link) => (
           <NavItem key={link.name} icon={link.icon} onClick={() => handleTabChange(link.value)} value={link.value}>
             {link.name}
