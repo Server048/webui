@@ -126,7 +126,6 @@ const NavItem = ({ icon, children, onClick, ...rest }: NavItemProps) => {
           {children}
         </Flex>
       </Box>
-    </Link>
   );
 };
 
