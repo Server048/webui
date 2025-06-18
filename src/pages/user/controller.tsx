@@ -166,6 +166,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   );
 };
 
+
+
 const SidebarWithHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const user = useSelfUser(); // Inisialisasi user di sini
@@ -173,14 +175,7 @@ const SidebarWithHeader = () => {
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
-  const Konten = {
-    home: () => <Text>Ini adalah konten Beranda.</Text>,
-    profile: () => <Text>Ini fungsi profil. Username: {user?.username || 'Tidak tersedia'}</Text>,
-
-    connect: () => <Text>Ini adalah konten Hubungkan.</Text>,
-    controller: () => <Text>Ini adalah konten Pengontrol.</Text>,
-    settings: () => <Text>Ini adalah konten Pengaturan.</Text>,
-  };
+ 
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} returnFocusOnClose={false} onOverlayClick={onClose} size="full">
@@ -231,6 +226,15 @@ const SidebarContent = ({ onClose, handleTabChange, ...rest }: SidebarProps) => 
   );
 };
 
+
+ const Konten = {
+    home: () => <Text>Ini adalah konten Beranda.</Text>,
+    profile: () => <Text>Ini fungsi profil. Username</Text>,
+
+    connect: () => <Text>Ini adalah konten Hubungkan.</Text>,
+    controller: () => <Text>Ini adalah konten Pengontrol.</Text>,
+    settings: () => <Text>Ini adalah konten Pengaturan.</Text>,
+  };
 
 const HomePage: NextPageWithLayout = () => {
   return <SidebarWithHeader />;
