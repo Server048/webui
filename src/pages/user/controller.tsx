@@ -74,11 +74,11 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, value: 'home' },
-  { name: 'Profile', icon: FiTrendingUp, value: 'profile' },
-  { name: 'Connect', icon: FiCompass, value: 'connect' },
-  { name: 'Controller', icon: FiSettings, value: 'controller' },
-  { name: 'Settings', icon: FiSettings, value: 'settings' },
+  { name: 'Beranda', icon: FiHome, value: 'home' },
+  { name: 'Profil', icon: FiTrendingUp, value: 'profile' },
+  { name: 'Hubungkan', icon: FiCompass, value: 'connect' },
+  { name: 'Pengontrol', icon: FiSettings, value: 'controller' },
+  { name: 'Pengaturan', icon: FiSettings, value: 'settings' },
 ];
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
@@ -95,12 +95,12 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          BOT CONTROLLER CPS
+          PENGATURAN BOT
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} href={link.href}> {/* Meneruskan href ke NavItem */}
+        <NavItem key={link.name} icon={link.icon} onClick={onClose} value={link.value}>
           {link.name}
         </NavItem>
       ))}
@@ -108,25 +108,25 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   );
 };
 
-const NavItem = ({ icon, children, onClick, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, children, onClick, value, ...rest }: NavItemProps & {value:string}) => {
   return (
-    <Box onClick={() => onClick(children)} _focus={{ boxShadow: 'none' }}>
-        <Flex
-          align="center"
-          p="4"
-          mx="4"
-          borderRadius="lg"
-          role="group"
-          cursor="pointer"
-          _hover={{ bg: 'cyan.400', color: 'white' }}
-          {...rest}
-        >
-          {icon && (
-            <Icon mr="4" fontSize="16" _groupHover={{ color: 'white' }} as={icon} />
-          )}
-          {children}
-        </Flex>
-      </Box>
+    <Box onClick={() => onClick(value)} _focus={{ boxShadow: 'none' }}>
+      <Flex
+        align="center"
+        p="4"
+        mx="4"
+        borderRadius="lg"
+        role="group"
+        cursor="pointer"
+        _hover={{ bg: 'cyan.400', color: 'white' }}
+        {...rest}
+      >
+        {icon && (
+          <Icon mr="4" fontSize="16" _groupHover={{ color: 'white' }} as={icon} />
+        )}
+        {children}
+      </Flex>
+    </Box>
   );
 };
 
@@ -153,7 +153,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       />
 
       <Text display={{ base: 'flex', md: 'none' }} fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-        BOT CONTROLLER CPS
+        PENGATURAN BOT
       </Text>
       <HStack spacing={{ base: '0', md: '6' }}>
         <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} />
@@ -179,11 +179,11 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               </HStack>
             </MenuButton>
             <MenuList bg={useColorModeValue('white', 'gray.900')} borderColor={useColorModeValue('gray.200', 'gray.700')}>
-              <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuItem>Billing</MenuItem>
+              <MenuItem>Profil</MenuItem>
+              <MenuItem>Pengaturan</MenuItem>
+              <MenuItem>Tagihan</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem>Keluar</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
@@ -208,7 +208,7 @@ const SidebarWithHeader = () => {
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent onClose={onClose} display={{ base: 'none', md: 'block' }}>
         {LinkItems.map((link) => (
-          <NavItem key={link.name} icon={link.icon} onClick={handleTabChange}>
+          <NavItem key={link.name} icon={link.icon} onClick={handleTabChange} value={link.value}>
             {link.name}
           </NavItem>
         ))}
@@ -217,7 +217,7 @@ const SidebarWithHeader = () => {
         <DrawerContent>
           <SidebarContent onClose={onClose}>
             {LinkItems.map((link) => (
-              <NavItem key={link.name} icon={link.icon} onClick={handleTabChange}>
+              <NavItem key={link.name} icon={link.icon} onClick={handleTabChange} value={link.value}>
                 {link.name}
               </NavItem>
             ))}
@@ -227,7 +227,7 @@ const SidebarWithHeader = () => {
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {Konten[activeTab]()}
-        <Text>Bekerja Sekarang</Text> {/* Ditambahkan untuk debugging */}
+        <Text>Bekerja Sekarang</Text>
       </Box>
     </Box>
   );
