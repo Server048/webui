@@ -23,9 +23,8 @@ import AppLayout from '@/components/layout/app';
 import { useLogoutMutation } from '@/utils/auth/hooks';
 import { useSelfUser } from '@/api/hooks';
 
-/**
- * User info and general settings here
- */
+
+
 const ProfilePage: NextPageWithLayout = () => {
   const user = useSelfUser();
   const logout = useLogoutMutation();
