@@ -101,15 +101,15 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} onClick={onClose} value={link.value}>
-          {link.name}
-        </NavItem>
-      ))}
+  <NavItem key={link.name} icon={link.icon} onClick={handleTabChange} value={link.value}>
+    {link.name}
+  </NavItem>
+))}
     </Box>
   );
 };
 
-const NavItem = ({ icon, children, onClick, ...rest }: NavItemProps & { [key: string]: any }) => {
+const NavItem = ({ icon, children, onClick, ...rest }: NavItemProps & { value: string: }) => {
   return (
     <Box onClick={() => onClick(value)} _focus={{ boxShadow: 'none' }}>
       <Flex
