@@ -219,9 +219,9 @@ const SidebarWithHeader = () => {
   );
 };
 
-const HomePage: NextPageWithLayout = () => {
+const ConPage: NextPageWithLayout = () => {
   return <SidebarWithHeader />;
 };
 
-HomePage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
-export default HomePage;
+ConPage.getLayout = (c) => <AppLayout>{c}</AppLayout>;
+export default ConPage;
