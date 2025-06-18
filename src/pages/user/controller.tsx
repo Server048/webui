@@ -101,13 +101,14 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-  <NavItem key={link.name} icon={link.icon} onClick={handleTabChange} value={link.value}>
-    {link.name}
-  </NavItem>
-))}
-    </Box>
+        <NavItem key={link.name} icon={link.icon} onClick={() => handleTabChange(link.value)} value={link.value}>
+          {link.name}
+        </NavItem>
+      ))}
+    </Box> // <-- Tag penutup </Box> ditambahkan di sini
   );
 };
+
 
 const NavItem = ({ icon, children, onClick, value, ...rest }: NavItemProps & { value: string; [key: string]: any }) => {
   return (
