@@ -172,10 +172,10 @@ const SidebarWithHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 //  const user = useSelfUser(); // Inisialisasi user di sini
   const [activeTab, setActiveTab] = useState('home');
-  const handleTabChange = (tab: string) => {
+  
+ const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
- 
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} returnFocusOnClose={false} onOverlayClick={onClose} size="full">
@@ -200,6 +200,9 @@ interface SidebarProps extends BoxProps {
 
 
 const SidebarContent = ({ onClose, handleTabChange, ...rest }: SidebarProps) => { // Terima handleTabChange sebagai prop
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+  };
   return (
     <Box
       transition="3s ease"
