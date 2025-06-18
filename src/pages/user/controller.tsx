@@ -109,7 +109,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   );
 };
 
-const NavItem = ({ icon, children, onClick, ...rest }: NavItemProps & { value: string: }) => {
+const NavItem = ({ icon, children, onClick, value, ...rest }: NavItemProps & { value: string; [key: string]: any }) => {
   return (
     <Box onClick={() => onClick(value)} _focus={{ boxShadow: 'none' }}>
       <Flex
