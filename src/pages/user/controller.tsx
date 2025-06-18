@@ -107,10 +107,9 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   );
 };
 
-const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => { // Menambahkan href
+const NavItem = ({ icon, children, onClick, ...rest }: NavItemProps) => {
   return (
-    <Link href={href || '#'}> {/* Menggunakan href untuk Link, default ke '#' jika tidak didefinisikan */}
-      <Box as="a" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+    <Box onClick={() => onClick(children)} _focus={{ boxShadow: 'none' }}>
         <Flex
           align="center"
           p="4"
