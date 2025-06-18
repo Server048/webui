@@ -70,9 +70,7 @@ interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 
-interface SidebarProps extends BoxProps {
-  onClose: () => void;
-}
+
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Beranda', icon: FiHome, value: 'home' },
@@ -82,32 +80,6 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Pengaturan', icon: FiSettings, value: 'settings' },
 ];
 
-const SidebarContent = ({ onClose, handleTabChange, ...rest }: SidebarProps & { handleTabChange: (tab: string) => void }) => {
-  return (
-    <Box
-      transition="3s ease"
-      bg={useColorModeValue('white', 'gray.900')}
-      borderRight="1px"
-      borderRightColor={useColorModeValue('gray.200', 'gray.700')}
-      w={{ base: 'full', md: 60 }}
-      pos="fixed"
-      h="full"
-      {...rest}
-    >
-      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          PENGATURAN BOT
-        </Text>
-        <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
-      </Flex>
-      {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} onClick={() => handleTabChange(link.value)} value={link.value}>
-          {link.name}
-        </NavItem>
-      ))}
-    </Box>
-  );
-};
 
 
 const NavItem = ({ icon, children, onClick, value, ...rest }: NavItemProps & { value: string; [key: string]: any }) => {
@@ -197,7 +169,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 const SidebarWithHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [activeTab, setActiveTab] = useState('home');
-  const user = useSelfUser();
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
@@ -210,24 +181,9 @@ const SidebarWithHeader = () => {
   };
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
-      <SidebarContent onClose={onClose} handleTabChange={handleTabChange} display={{ base: 'none', md: 'block' }}>
-        {/* ... */}
-      </SidebarContent>
-        {LinkItems.map((link) => (
-          <NavItem key={link.name} icon={link.icon} onClick={() => handleTabChange(link.value)} value={link.value}>
-            {link.name}
-          </NavItem>
-        ))}
-      </SidebarContent>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} returnFocusOnClose={false} onOverlayClick={onClose} size="full">
         <DrawerContent>
-          <SidebarContent onClose={onClose}>
-            {LinkItems.map((link) => (
-              <NavItem key={link.name} icon={link.icon} onClick={() => handleTabChange(link.value)} value={link.value}>
-                {link.name}
-              </NavItem>
-            ))}
-          </SidebarContent>
+          <SidebarContent onClose={onClose} handleTabChange={handleTabChange} />
         </DrawerContent>
       </Drawer>
       <MobileNav onOpen={onOpen} />
@@ -235,6 +191,40 @@ const SidebarWithHeader = () => {
         {Konten[activeTab]()}
         <Text>Bekerja Sekarang</Text>
       </Box>
+    </Box>
+  );
+};
+
+
+interface SidebarProps extends BoxProps {
+  onClose: () => void;
+  handleTabChange: (tab: string) => void;
+}
+
+
+const SidebarContent = ({ onClose, handleTabChange, ...rest }: SidebarProps) => {
+  return (
+    <Box
+      transition="3s ease"
+      bg={useColorModeValue('white', 'gray.900')}
+      borderRight="1px"
+      borderRightColor={useColorModeValue('gray.200', 'gray.700')}
+      w={{ base: 'full', md: 60 }}
+      pos="fixed"
+      h="full"
+      {...rest}
+    >
+      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
+        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+          PENGATURAN BOT
+        </Text>
+        <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
+      </Flex>
+      {LinkItems.map((link) => (
+        <NavItem key={link.name} icon={link.icon} onClick={() => handleTabChange(link.value)} value={link.value}>
+          {link.name}
+        </NavItem>
+      ))}
     </Box>
   );
 };
