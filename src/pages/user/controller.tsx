@@ -49,7 +49,7 @@ import { useSelfUser } from '@/api/hooks';
 import { NextPageWithLayout } from '@/pages/_app';
 import AppLayout from '@/components/layout/app';
 import { iconUrl } from '@/api/discord';
-import { useState } from 'react';
+import Link from 'next/link';
 
 
 interface LinkItemProps {
