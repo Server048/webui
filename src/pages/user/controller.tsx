@@ -199,7 +199,7 @@ const SidebarWithHeader = () => {
   const user = useSelfUser();
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
-  };
+  }; // <-- Kurung kurawal penutup untuk handleTabChange
   const Konten = {
     home: () => <Text>Ini adalah konten Beranda.</Text>,
     profile: () => <Text>Ini fungsi profil. Username: {user.username}</Text>,
@@ -211,20 +211,11 @@ const SidebarWithHeader = () => {
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent onClose={onClose} display={{ base: 'none', md: 'block' }}>
         {LinkItems.map((link) => (
-          <NavItem key={link.name} icon={link.icon} onClick={handleTabChange} value={link.value}>
+          <NavItem key={link.name} icon={link.icon} onClick={() => handleTabChange(link.value)} value={link.value}>
             {link.name}
           </NavItem>
         ))}
       </SidebarContent>
-      <Drawer isOpen={isOpen} placement="left" onClose={onClose} returnFocusOnClose={false} onOverlayClick={onClose} size="full">
-        <DrawerContent>
-          <SidebarContent onClose={onClose}>
-            {LinkItems.map((link) => (
-              <NavItem key={link.name} icon={link.icon} onClick={handleTabChange} value={link.value}>
-                {link.name}
-              </NavItem>
-            ))}
-          </SidebarContent>
         </DrawerContent>
       </Drawer>
       <MobileNav onOpen={onOpen} />
