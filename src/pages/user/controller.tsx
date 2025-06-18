@@ -179,10 +179,10 @@ const SidebarWithHeader = () => {
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} returnFocusOnClose={false} onOverlayClick={onClose} size="full">
-        <DrawerContent>
-          <SidebarContent onClose={onClose} handleTabChange={handleTabChange} />
-        </DrawerContent>
-      </Drawer>
+      <DrawerContent>
+        <SidebarContent onClose={onClose} handleTabChange={handleTabChange} /> {/* handleTabChange dilewatkan sebagai prop */}
+      </DrawerContent>
+    </Drawer>
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {Konten[activeTab]()}
@@ -195,11 +195,11 @@ const SidebarWithHeader = () => {
 
 interface SidebarProps extends BoxProps {
   onClose: () => void;
-  handleTabChange: (tab: string) => void;
+  handleTabChange: (tab: string) => void; // Tambahkan handleTabChange di sini
 }
 
 
-const SidebarContent = ({ onClose, handleTabChange, ...rest }: SidebarProps) => {
+const SidebarContent = ({ onClose, handleTabChange, ...rest }: SidebarProps) => { // Terima handleTabChange sebagai prop
   return (
     <Box
       transition="3s ease"
@@ -218,10 +218,10 @@ const SidebarContent = ({ onClose, handleTabChange, ...rest }: SidebarProps) => 
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} onClick={() => handleTabChange(link.value)} value={link.value}>
-          {link.name}
-        </NavItem>
-      ))}
+      <NavItem key={link.name} icon={link.icon} onClick={() => handleTabChange(link.value)} value={link.value}> {/* Panggil handleTabChange di sini */}
+        {link.name}
+      </NavItem>
+    ))}
     </Box>
   );
 };
