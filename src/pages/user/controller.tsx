@@ -59,11 +59,12 @@ interface LinkItemProps {
   value: string;
 }
 
-interface NavItemProps extends FlexProps {
+interface NavItemProps {
   icon: IconType;
   children: React.ReactNode;
-  onClick: (value: string) => void;
+  onClick: (value: string) => void;  //Tipe onClick yang benar
 }
+
 
 interface MobileProps extends FlexProps {
   onOpen: () => void;
@@ -108,7 +109,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   );
 };
 
-const NavItem = ({ icon, children, onClick, value, ...rest }: NavItemProps & {value:string}) => {
+const NavItem = ({ icon, children, onClick, ...rest }: NavItemProps & { [key: string]: any }) => {
   return (
     <Box onClick={() => onClick(value)} _focus={{ boxShadow: 'none' }}>
       <Flex
